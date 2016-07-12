@@ -149,7 +149,7 @@ set -e
 # search out npm/node within $METEOR_DIR.
 BARE_VERSION=`echo "$APP_RELEASE" | sed -e 's/METEOR@//'`
 echo "------> Preparing for hack with bare version= $BARE_VERSION ...."
-echo `ls -al $METEOR_DIR`
+echo `ls -al $METEOR_DIR/.meteor`
 METEOR_NPM=`$METEOR_DIR $METEOR --release $BARE_VERSION npm`
 METEOR_NODE=`$METEOR_DIR $METEOR --release $BARE_VERSION node`
 # if [ -z "$METEOR_NPM" ] || [ -z "$METEOR_NODE" ] ; then
