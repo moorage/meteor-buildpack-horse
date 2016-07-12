@@ -148,7 +148,8 @@ set -e
 # https://github.com/meteor/meteor/issues/7338
 # search out npm/node within $METEOR_DIR.
 BARE_VERSION=`echo "$APP_RELEASE" | sed -e 's/METEOR@//'`
-echo "------> Preparing for hack with bare version= $BARE_VERSION"
+echo "------> Preparing for hack with bare version= $BARE_VERSION ...."
+echo `ls -al $METEOR_DIR`
 METEOR_NPM=`find $METEOR_DIR -wholename "*$BARE_VERSION*/dev_bundle/bin/npm"`
 METEOR_NODE=`find $METEOR_DIR -wholename "*$BARE_VERSION*/dev_bundle/bin/node"`
 if [ -z "$METEOR_NPM" ] || [ -z "$METEOR_NODE" ] ; then
