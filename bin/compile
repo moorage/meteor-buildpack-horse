@@ -141,6 +141,8 @@ HOME=$METEOR_DIR $METEOR npm --version > /dev/null
 METEOR_NPM_EXIT_CODE=$?
 set -e
 
+echo "------> Preparing for hack"
+
 # <hack>
 # We'd like to use `meteor node` and `meteor npm`, but they're unreliable.
 # https://github.com/AdmitHub/meteor-buildpack-horse/issues/120
@@ -166,7 +168,7 @@ if [ -e "$APP_SOURCE_DIR"/package.json ]; then
   HOME=$METEOR_DIR $METEOR_NPM install
 fi
 
-# Related to https://github.com/meteor/meteor/issues/2796 and 
+# Related to https://github.com/meteor/meteor/issues/2796 and
 # https://github.com/meteor/meteor/issues/2606.  Some packages only build their
 # assets at runtime, and thus they are not available for bundling unless meteor
 # has been launched.  To opt-in to this, set BUILDPACK_PRELAUNCH_METEOR=1.
