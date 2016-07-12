@@ -150,21 +150,21 @@ set -e
 BARE_VERSION=`echo "$APP_RELEASE" | sed -e 's/METEOR@//'`
 echo "------> Preparing for hack with bare version= $BARE_VERSION ...."
 echo `ls -al $METEOR_DIR`
-METEOR_NPM=`find $METEOR_DIR -wholename "*$BARE_VERSION*/dev_bundle/bin/npm"`
-METEOR_NODE=`find $METEOR_DIR -wholename "*$BARE_VERSION*/dev_bundle/bin/node"`
-if [ -z "$METEOR_NPM" ] || [ -z "$METEOR_NODE" ] ; then
-  echo "FATAL: Can't find npm/node within meteor bundle. This is a bug. Please open an issue at https://github.com/AdmitHub/meteor-buildpack-horse.";
-  exit 1
-fi
+METEOR_NPM=`$METEOR_DIR $METEOR --release $BARE_VERSION npm`
+METEOR_NODE=`$METEOR_DIR $METEOR --release $BARE_VERSION node`
+# if [ -z "$METEOR_NPM" ] || [ -z "$METEOR_NODE" ] ; then
+#   echo "FATAL: Can't find npm/node within meteor bundle. This is a bug. Please open an issue at https://github.com/AdmitHub/meteor-buildpack-horse.";
+#   exit 1
+# fi
 
 echo "-------> Found METEOR_NPM=$METEOR_NPM"
 echo "-------> Found METEOR_NODE=$METEOR_NODE"
 
 # Trim whitespace
-METEOR_NPM=`echo "$METEOR_NPM" | sed -e 's/[[:space:]]*$//'`
-METEOR_NODE=`echo "$METEOR_NODE" | sed -e 's/[[:space:]]*$//'`
-echo "-----> Using searched-for node: `$METEOR_NODE --version`"
-echo "----->                 and npm: `$METEOR_NPM --version`"
+# METEOR_NPM=`echo "$METEOR_NPM" | sed -e 's/[[:space:]]*$//'`
+# METEOR_NODE=`echo "$METEOR_NODE" | sed -e 's/[[:space:]]*$//'`
+echo "-----> Using release version node: `$METEOR_NODE --version`"
+echo "----->                    and npm: `$METEOR_NPM --version`"
 # </hack>
 
 # If we use npm on root, run npm install.  Don't use `--production` here, as we
